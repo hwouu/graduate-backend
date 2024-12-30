@@ -13,12 +13,14 @@ services:
     command: sh -c "npx prisma migrate deploy && npm run dev"
 
   db:
-    image: postgres:13
+    image: postgres:14
+    container_name: graduate_db
+    restart: always
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=graduate123
       - POSTGRES_DB=graduate_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
