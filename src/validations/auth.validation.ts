@@ -1,3 +1,5 @@
+// src/validations/auth.validation.ts 
+
 import { body } from 'express-validator';
 
 export const authValidation = {

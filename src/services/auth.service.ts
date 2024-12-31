@@ -1,3 +1,5 @@
+// src/services/auth.service.ts
+
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';

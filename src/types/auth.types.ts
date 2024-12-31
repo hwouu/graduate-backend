@@ -1,3 +1,4 @@
+// src/types/auth.types.ts
 export interface RegisterDTO {
   email: string;
   password: string;
