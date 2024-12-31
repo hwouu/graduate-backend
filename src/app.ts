@@ -1,23 +1,34 @@
 import express from 'express';
-import { PrismaClient } from '@prisma/client';
+import cors from 'cors';
+import authRoutes from './routes/auth.routes';
 
 const app = express();
-const prisma = new PrismaClient();
-const port = process.env.PORT || 3000;
 
+// Middleware
+app.use(cors());
 app.use(express.json());
 
-// 기본 라우트
+// Routes
+app.use('/api/auth', authRoutes);
+
+// Basic route for testing
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to Graduate Backend API' });
 });
 
-// 서버 시작
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+// Error handling middleware
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something broke!' });
 });
 
-// Prisma 에러 핸들링
-process.on('beforeExit', () => {
-  prisma.$disconnect();
+// 404 handler
+app.use((req: express.Request, res: express.Response) => {
+  res.status(404).json({ error: `Cannot ${req.method} ${req.path}` });
+});
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

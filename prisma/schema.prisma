@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,25 +7,63 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// 사용자 모델
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  name      String
-  major     String   // 전공
-  studentId String   // 학번
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String    @id @default(uuid())
+  email         String    @unique
+  password      String
+  name          String
+  studentId     String    @unique
+  department    String
+  admissionYear Int
+  targetYear    Int
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  enrollments   Enrollment[]
 }
 
-// 과목 모델
 model Course {
-  id          Int      @id @default(autoincrement())
-  code        String   @unique  // 과목 코드
-  name        String           // 과목명
-  credits     Int              // 학점
-  courseType  String           // 이수 구분 (전필, 전선, 교양 등)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String    @id @default(uuid())
+  code          String    @unique
+  name          String
+  credits       Int
+  courseType    CourseType
+  prerequisiteId String?
+  prerequisite   Course?  @relation("PrerequisiteCourse", fields: [prerequisiteId], references: [id])
+  nextCourses    Course[] @relation("PrerequisiteCourse")
+  semester      String?
+  isRequired    Boolean   @default(false)
+  enrollments   Enrollment[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Enrollment {
+  id        String    @id @default(uuid())
+  userId    String
+  courseId  String
+  user      User      @relation(fields: [userId], references: [id])
+  course    Course    @relation(fields: [courseId], references: [id])
+  grade     String?
+  semester  String
+  status    EnrollmentStatus @default(PLANNED)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@unique([userId, courseId, semester])
+}
+
+enum CourseType {
+  MAJOR_REQUIRED
+  MAJOR_ELECTIVE
+  MAJOR_INTENSIVE
+  LIBERAL_REQUIRED
+  LIBERAL_ELECTIVE
+  GENERAL_ELECTIVE
+}
+
+enum EnrollmentStatus {
+  PLANNED
+  ENROLLED
+  COMPLETED
+  RETAKING
 }
