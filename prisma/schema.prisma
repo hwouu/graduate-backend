@@ -19,6 +19,12 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   enrollments   Enrollment[]
+  role      UserRole    @default(STUDENT)
+}
+
+enum UserRole {
+  ADMIN
+  STUDENT
 }
 
 model Course {
