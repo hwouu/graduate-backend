@@ -31,27 +31,27 @@ import { checkAdmin } from '../middlewares/check-admin';
  *             properties:
  *               code:
  *                 type: string
- *                 description: 과목 코드
+ *                 description: '과목 코드'
  *               name:
  *                 type: string
- *                 description: 과목명
+ *                 description: '과목명'
  *               credits:
  *                 type: integer
- *                 description: 학점
+ *                 description: '학점'
  *               courseType:
  *                 type: string
  *                 enum: [MAJOR_REQUIRED, MAJOR_ELECTIVE, MAJOR_INTENSIVE, LIBERAL_REQUIRED, LIBERAL_ELECTIVE, GENERAL_ELECTIVE]
- *                 description: 과목 유형
+ *                 description: '과목 유형'
  *               prerequisiteId:
  *                 type: string
  *                 format: uuid
- *                 description: 선수과목 ID
+ *                 description: '선수과목 ID'
  *               semester:
  *                 type: string
- *                 description: 개설 학기
+ *                 description: '개설 학기'
  *               isRequired:
  *                 type: boolean
- *                 description: 필수과목 여부
+ *                 description: '필수과목 여부'
  *     responses:
  *       201:
  *         description: 과목 생성 성공
@@ -77,17 +77,17 @@ import { checkAdmin } from '../middlewares/check-admin';
  *         schema:
  *           type: string
  *           enum: [MAJOR_REQUIRED, MAJOR_ELECTIVE, MAJOR_INTENSIVE, LIBERAL_REQUIRED, LIBERAL_ELECTIVE, GENERAL_ELECTIVE]
- *         description: 과목 유형 필터
+ *         description: '과목 유형 필터'
  *       - in: query
  *         name: semester
  *         schema:
  *           type: string
- *         description: 학기 필터 (예: 2023-1)
+ *         description: '학기 필터 (예시 - 2023-1)'
  *       - in: query
  *         name: isRequired
  *         schema:
  *           type: boolean
- *         description: 필수과목 여부 필터
+ *         description: '필수과목 여부 필터'
  *     responses:
  *       200:
  *         description: 과목 목록 조회 성공
@@ -116,7 +116,7 @@ import { checkAdmin } from '../middlewares/check-admin';
  *         schema:
  *           type: string
  *           format: uuid
- *         description: 과목 ID
+ *         description: '과목 ID'
  *     responses:
  *       200:
  *         description: 과목 조회 성공
@@ -139,7 +139,7 @@ import { checkAdmin } from '../middlewares/check-admin';
  *         schema:
  *           type: string
  *           format: uuid
- *         description: 과목 ID
+ *         description: '과목 ID'
  *     requestBody:
  *       required: true
  *       content:
@@ -170,7 +170,7 @@ import { checkAdmin } from '../middlewares/check-admin';
  *         schema:
  *           type: string
  *           format: uuid
- *         description: 과목 ID
+ *         description: '과목 ID'
  *     responses:
  *       204:
  *         description: 과목 삭제 성공
@@ -219,4 +219,3 @@ router.delete('/:id',
 );
 
 export default router;
-

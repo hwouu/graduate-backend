@@ -29,13 +29,13 @@ import { authenticateJwt } from '../middlewares/authenticate';
  *               courseId:
  *                 type: string
  *                 format: uuid
- *                 description: 과목 ID
+ *                 description: '과목 ID'
  *               semester:
  *                 type: string
- *                 description: 수강 학기 (예: 2023-1)
+ *                 description: '수강 학기 (예시 - 2023-1)'
  *               grade:
  *                 type: string
- *                 description: 성적
+ *                 description: '성적'
  *     responses:
  *       201:
  *         description: 수강신청 생성 성공
@@ -58,13 +58,13 @@ import { authenticateJwt } from '../middlewares/authenticate';
  *         name: semester
  *         schema:
  *           type: string
- *         description: 학기 필터 (예: 2023-1)
+ *         description: '학기 필터 (예시 - 2023-1)'
  *       - in: query
  *         name: status
  *         schema:
  *           type: string
  *           enum: [PLANNED, ENROLLED, COMPLETED, RETAKING]
- *         description: 수강신청 상태 필터
+ *         description: '수강신청 상태 필터'
  *     responses:
  *       200:
  *         description: 수강신청 목록 조회 성공
@@ -93,7 +93,7 @@ import { authenticateJwt } from '../middlewares/authenticate';
  *         schema:
  *           type: string
  *           format: uuid
- *         description: 수강신청 ID
+ *         description: '수강신청 ID'
  *     requestBody:
  *       required: true
  *       content:
@@ -103,11 +103,11 @@ import { authenticateJwt } from '../middlewares/authenticate';
  *             properties:
  *               grade:
  *                 type: string
- *                 description: 성적
+ *                 description: '성적'
  *               status:
  *                 type: string
  *                 enum: [PLANNED, ENROLLED, COMPLETED, RETAKING]
- *                 description: 수강신청 상태
+ *                 description: '수강신청 상태'
  *     responses:
  *       200:
  *         description: 수강신청 정보 수정 성공
@@ -132,7 +132,7 @@ import { authenticateJwt } from '../middlewares/authenticate';
  *         schema:
  *           type: string
  *           format: uuid
- *         description: 수강신청 ID
+ *         description: '수강신청 ID'
  *     responses:
  *       200:
  *         description: 수강신청 삭제 성공

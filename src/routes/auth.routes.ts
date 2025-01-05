@@ -22,7 +22,7 @@ import { authValidation } from '../validations/auth.validation';
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/RegisterRequest'
+ *             $ref: '#/components/schemas/RegisterDTO'
  *     responses:
  *       201:
  *         description: 회원가입 성공
@@ -49,7 +49,7 @@ import { authValidation } from '../validations/auth.validation';
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/LoginRequest'
+ *             $ref: '#/components/schemas/LoginDTO'
  *     responses:
  *       200:
  *         description: 로그인 성공
