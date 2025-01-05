@@ -45,6 +45,32 @@ const swaggerOptions: Options = {
             password: { type: 'string' }
           }
         },
+        AuthResponse: {
+          type: 'object',
+          properties: {
+            token: { type: 'string' },
+            user: {
+              type: 'object',
+              properties: {
+                id: { type: 'string', format: 'uuid' },
+                email: { type: 'string', format: 'email' },
+                name: { type: 'string' },
+                studentId: { type: 'string' },
+                department: { type: 'string' },
+                admissionYear: { type: 'integer' },
+                targetYear: { type: 'integer' },
+                role: { type: 'string', enum: ['ADMIN', 'STUDENT'] }
+              }
+            }
+          }
+        },
+        ErrorResponse: {
+          type: 'object',
+          properties: {
+            error: { type: 'string' },
+            message: { type: 'string' }
+          }
+        },
         Course: {
           type: 'object',
           properties: {
@@ -59,6 +85,21 @@ const swaggerOptions: Options = {
             prerequisiteId: { type: 'string', format: 'uuid', nullable: true },
             semester: { type: 'string', nullable: true },
             isRequired: { type: 'boolean' }
+          }
+        },
+        Enrollment: {
+          type: 'object',
+          properties: {
+            id: { type: 'string', format: 'uuid' },
+            userId: { type: 'string', format: 'uuid' },
+            courseId: { type: 'string', format: 'uuid' },
+            grade: { type: 'string', nullable: true },
+            semester: { type: 'string' },
+            status: {
+              type: 'string',
+              enum: ['PLANNED', 'ENROLLED', 'COMPLETED', 'RETAKING']
+            },
+            course: { $ref: '#/components/schemas/Course' }
           }
         },
         CreditSummary: {
